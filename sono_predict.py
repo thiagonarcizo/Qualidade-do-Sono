@@ -54,8 +54,8 @@ user_data = pd.get_dummies(user)
 user_data = user_data.reindex(columns=X_train.columns, fill_value=0)
 
 #faz as predições para duração e qualidade do sono
-sleep_duration_prediction = model_sleep_duration.predict(user_data)
-sleep_quality_prediction = model_sleep_quality.predict(user_data)
+sleep_duration_pred = model_sleep_duration.predict(user_data)
+sleep_quality_pred = model_sleep_quality.predict(user_data)
 
 #calcula o R^2 and MSE para duração e qualidade do sono
 sleep_duration_r2 = r2_score(y_test_sleep_duration, model_sleep_duration.predict(X_test))
@@ -65,7 +65,7 @@ sleep_quality_mse = mean_squared_error(y_test_sleep_quality, model_sleep_quality
 
 #botão para mostrar os resultados:
 if st.button('Mostrar resultados'):
-    st.write('Duração do sono: ', round(sleep_duration_prediction[0], 2), ' horas.')
-    st.write('Qualidade do sono: ', round(sleep_quality_prediction[0], 2), ' (0 - 10).')
+    st.write('Duração do sono: ', round(sleep_duration_pred[0], 2), ' horas.')
+    st.write('Qualidade do sono: ', round(sleep_quality_pred[0], 2), ' (0 - 10).')
     #st.write('Duração do sono: ', sleep_duration_prediction[0], ' horas')
     #st.write('Qualidade do sono: ', sleep_quality_prediction[0], ' (0 - 10)')
