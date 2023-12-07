@@ -38,14 +38,14 @@ model_sleep_quality = LinearRegression()
 model_sleep_quality.fit(X_train, y_train_sleep_quality)
 
 #faz as predições para duração do sono com base nos inputs pessoais
-age = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
-gender = st.selectbox('Selecione seu gênero:', ('Male', 'Female'))
-occupation = st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager'))
+idade = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
+genero = st.selectbox('Selecione seu gênero:', ('Male', 'Female'))
+prof = st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager'))
 stress_level = st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1)
 sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia'))
 
 #cria um dataframe com os dados do usuário
-user_data = pd.DataFrame({'Age': [age], 'Occupation': [occupation], 'Gender': [gender], 'Stress Level': [stress_level], 'Sleep Disorder': ['']})
+user_data = pd.DataFrame({'Age': [idade], 'Occupation': [prof], 'Gender': [genero], 'Stress Level': [stress_level], 'Sleep Disorder': ['']})
 
 #converte as variáveis categóricas em numéricas (do usuário)
 user_data = pd.get_dummies(user_data)
