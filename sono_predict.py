@@ -45,10 +45,10 @@ stress_level = st.number_input('Seu nível de estresse (0 - 10):', min_value=0, 
 sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia'))
 
 #cria um dataframe com os dados do usuário
-user_data = pd.DataFrame({'Age': [idade], 'Occupation': [prof], 'Gender': [genero], 'Stress Level': [stress_level], 'Sleep Disorder': ['']})
+user = pd.DataFrame({'Age': [idade], 'Occupation': [prof], 'Gender': [genero], 'Stress Level': [stress_level], 'Sleep Disorder': [sleep_disorder]})
 
 #converte as variáveis categóricas em numéricas (do usuário)
-user_data = pd.get_dummies(user_data)
+user_data = pd.get_dummies(user)
 
 #reindexa o dataframe para que ele tenha as mesmas colunas do X_train
 user_data = user_data.reindex(columns=X_train.columns, fill_value=0)
