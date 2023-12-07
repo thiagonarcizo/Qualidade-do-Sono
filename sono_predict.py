@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 #ds:
-uri = 'data\ds.csv'
+uri = '/data/ds.csv'
 ds = pd.read_csv(uri)
 
 #cópia de segurança
