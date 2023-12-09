@@ -11,11 +11,12 @@ model_sleep_quality = joblib.load('model_quality.pkl')
 st.set_page_config(
     page_icon='💤',
     page_title='Qualidade do Sono',
+    layout='wide'
 )
 
 #navbar
 selected2 = option_menu(None, ['Início', 'Como funciona?', 'Sobre'], 
-    icons=['house', 'clipboard2-data', 'info-circle'], 
+    icons=['house', 'clipboard2-data', 'info-circle'],
     menu_icon='cast', default_index=0, orientation='horizontal')
 
 #página inicial
@@ -26,12 +27,18 @@ if selected2 == 'Início':
     Preencha os dados e receba uma previsão da duração e da qualidade do seu sono com base nas informações fornecidas.
     ''')
 
+    st.divider()
+
     #faz as predições para duração do sono com base nos inputs pessoais
-    idade = int(st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1))
-    genero = str(st.selectbox('Selecione seu gênero:', ('Male', 'Female')))
-    prof = str(st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager')))
-    stress_level = int(st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1))
-    sleep_disorder = str(st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia')))
+    col1, col2 = st.columns(2)
+
+    with col1:
+        idade = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
+        genero = st.selectbox('Selecione seu gênero:', ('Male', 'Female'))
+        prof = st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager'))
+    with col2:
+        stress_level = st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1)
+        sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia'))
 
     #cria um dataframe com os dados do usuário
     user = pd.DataFrame({'Age': [idade], 'Occupation': [prof], 'Gender': [genero], 'Stress Level': [stress_level], 'Sleep Disorder': [sleep_disorder]})
@@ -71,6 +78,7 @@ elif selected2 == 'Como funciona?':
     st.markdown('''
     A partir dessas variáveis, treinamos um modelo de regressão linear para prever a duração e a qualidade do sono de uma pessoa com base nas informações fornecidas.
                 ''')
+    st.divider()
     st.markdown('''
     #### O modelo é confiável?
     Para avaliar a qualidade do modelo treinado, calculamos o **R²** e o **MSE** (Erro Quadrático Médio) para a duração e a qualidade do sono.
@@ -78,8 +86,6 @@ elif selected2 == 'Como funciona?':
     st.markdown('''
     Sim, modelo é confiável, pois apresenta um **R² de 0.85 para a duração do sono (MSE 0.10)** e **R² de 0.93 para a qualidade do sono (MSE 0.11)**.
                 ''')
-    
-
     with st.expander('Clique aqui para visualizar os gráficos', expanded=False):
         st.markdown('''
         ## Visualizando os dados
@@ -94,7 +100,6 @@ elif selected2 == 'Como funciona?':
         **Tempo médio de sono levando em conta a desordem do sono**:
                     ''')
         st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_desordem.png')
-
 
     st.markdown('''
     ## Limitações
@@ -115,8 +120,9 @@ elif selected2 == 'Sobre':
     - Instagram: [@ligadsunicamp](https://www.instagram.com/ligadsunicamp/)
     - LinkedIn: [Liga de Data Science](https://www.linkedin.com/company/liga-de-data-science/)
                 ''')
+    st.divider()
+    st.title('Integrantes do projeto')
     st.markdown('''
-    ### Integrantes do projeto
     - Meio (suas infos aqui)
     - [Thiago Narcizo](https://www.linkedin.com/in/thiago-narcizo/)
                 ''')
