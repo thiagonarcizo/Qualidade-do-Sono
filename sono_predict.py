@@ -105,6 +105,10 @@ elif selected2 == 'Como funciona?':
     O gráfico abaixo mostra o **tempo médio de sono por profissão** e **a qualidade média do sono por profissão**:
                 ''')
     st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_profissao.png')
+    st.markdown('''
+    **Tempo médio de sono levando em conta a desordem do sono**:
+                ''')
+    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_desordem.png')
 
 
     st.markdown('''
