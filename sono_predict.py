@@ -27,11 +27,11 @@ if selected2 == 'Início':
     ''')
 
     #faz as predições para duração do sono com base nos inputs pessoais
-    idade = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
-    genero = st.selectbox('Selecione seu gênero:', ('Male', 'Female'))
-    prof = st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager'))
-    stress_level = st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1)
-    sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia'))
+    idade = int(st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1))
+    genero = str(st.selectbox('Selecione seu gênero:', ('Male', 'Female')))
+    prof = str(st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager')))
+    stress_level = int(st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1))
+    sleep_disorder = str(st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia')))
 
     #cria um dataframe com os dados do usuário
     user = pd.DataFrame({'Age': [idade], 'Occupation': [prof], 'Gender': [genero], 'Stress Level': [stress_level], 'Sleep Disorder': [sleep_disorder]})
