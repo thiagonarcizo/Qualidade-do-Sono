@@ -138,7 +138,7 @@ elif selected2 == 'Como funciona?':
     A partir dessas variáveis, treinamos um modelo de regressão linear para prever a duração e a qualidade do sono de uma pessoa com base nas informações fornecidas.
                 ''')
     st.markdown('''
-    A média geral de tempo de sono é: 7.13 horas e a média geral de qualidade do sono é: 7.31.
+    A média geral de tempo de sono é: 7.13 horas e a pontuação média geral de qualidade do sono é: 7.31.
                 ''')
     st.divider()
     st.markdown('''
