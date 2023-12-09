@@ -115,17 +115,14 @@ if selected2 == 'Início':
 
     #botão para mostrar os resultados:
     if st.button(r'''$\textsf{\LARGE Mostrar Resultados}$'''):
-        col1, col2 = st.columns(2)
-        with col1:
-            if genero == 'Masculino':
-                st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
-                st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
-            else:
-                st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
-                st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
-        with col2:
-            st.latex(r'\textsf{\Large Você tem '+'\Large '+str(round(abs(sleep_duration_vs_avg), 2))+' horas de sono a mais do que a média}' if sleep_duration_vs_avg > 0 else (r'\textsf{\Large Você tem '+'\Large '+str(round(abs(sleep_duration_vs_avg), 2))+' horas de sono a menos do que a média}'))
-            st.latex(r'\textsf{\Large Você pontuou '+'\Large '+str(round(abs(sleep_quality_vs_avg), 2))+' a mais do que a média}' if sleep_quality_vs_avg > 0 else (r'\textsf{\Large Você pontuou '+'\Large '+str(round(abs(sleep_quality_vs_avg), 2))+' a menos do que a média}'))
+        if genero == 'Masculino':
+            st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
+            st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
+        else:
+            st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
+            st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
+        st.latex(r'\textsf{\Large Você tem '+'\Large '+str(round(abs(sleep_duration_vs_avg), 2))+' horas de sono a mais do que a média}' if sleep_duration_vs_avg > 0 else (r'\textsf{\Large Você tem '+'\Large '+str(round(abs(sleep_duration_vs_avg), 2))+' horas de sono a menos do que a média}'))
+        st.latex(r'\textsf{\Large Você pontuou '+'\Large '+str(round(abs(sleep_quality_vs_avg), 2))+' a mais do que a média}' if sleep_quality_vs_avg > 0 else (r'\textsf{\Large Você pontuou '+'\Large '+str(round(abs(sleep_quality_vs_avg), 2))+' a menos do que a média}'))
 
 #página 'Como funciona?'
 elif selected2 == 'Como funciona?':
