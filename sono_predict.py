@@ -92,31 +92,49 @@ elif selected2 == 'Como funciona?':
     A partir dessas variáveis, treinamos um modelo de regressão linear para prever a duração e a qualidade do sono de uma pessoa com base nas informações fornecidas.
                 ''')
     st.markdown('''
-    O modelo é confiável, pois apresenta um **R² de 0.85 para a duração do sono (MSE 0.10)** e **R² de 0.93 para a qualidade do sono (MSE 0.11)**.
+    #### O modelo é confiável?
+    Para avaliar a qualidade do modelo treinado, calculamos o **R²** e o **MSE** (Erro Quadrático Médio) para a duração e a qualidade do sono.
+                ''')
+    st.markdown('''
+    Sim, modelo é confiável, pois apresenta um **R² de 0.85 para a duração do sono (MSE 0.10)** e **R² de 0.93 para a qualidade do sono (MSE 0.11)**.
                 ''')
     
 
-    st.markdown('''
-    ## Visualizando os dados
-    O gráfico abaixo mostra o **nível de estresse pelo tempo dormido (em horas) juntamente com a sua qualidade (escala de 0 a 10)**:
-                ''')
-    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/estresse_tempo_qualidade.png')
-    st.markdown('''
-    O gráfico abaixo mostra o **tempo médio de sono por profissão** e **a qualidade média do sono por profissão**:
-                ''')
-    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_profissao.png')
-    st.markdown('''
-    **Tempo médio de sono levando em conta a desordem do sono**:
-                ''')
-    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_desordem.png')
+    with st.expander('Clique aqui para visualizar os gráficos', expanded=False):
+        st.markdown('''
+        ## Visualizando os dados
+        O gráfico abaixo mostra o **nível de estresse pelo tempo dormido (em horas) juntamente com a sua qualidade (escala de 0 a 10)**:
+                    ''')
+        st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/estresse_tempo_qualidade.png')
+        st.markdown('''
+        O gráfico abaixo mostra o **tempo médio de sono por profissão** e **a qualidade média do sono por profissão**:
+                    ''')
+        st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_profissao.png')
+        st.markdown('''
+        **Tempo médio de sono levando em conta a desordem do sono**:
+                    ''')
+        st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_desordem.png')
 
 
     st.markdown('''
     ## Limitações
-    O modelo, obviamente, não é perfeito, pois não leva em consideração outros fatores que podem influenciar a duração e a qualidade do sono, como a alimentação e a prática de exercícios físicos.
+    O modelo, obviamente, não é perfeito, porque não leva em consideração outros fatores que podem influenciar a duração e a qualidade do sono, como a alimentação e a prática de exercícios físicos.
                 ''')
     st.markdown('''
-    Além disso, o dataset não apresenta muitas pessoas com idades extremas, o que pode comprometer a previsão para pessoas muito jovens ou muito velhas.
+    Além disso, em algumas categorias, o dataset pode carecer de uma quantidade expressiva de informações, o que influencia na análise estatística final dos dados.
                 ''')
 elif selected2 == 'Sobre':
     st.title('Sobre')
+    st.markdown('''
+    Tratamento e análise dos dados pela **Liga de Data Science da Unicamp (LigaDS)**.
+                ''')
+    st.markdown('''
+    Para mais informações, cheque as nossas redes sociais:
+    - Instagram: [@ligadsunicamp](https://www.instagram.com/ligadsunicamp/)
+    - LinkedIn: [Liga de Data Science](https://www.linkedin.com/company/liga-de-data-science/)
+                ''')
+    st.markdown('''
+    ### Integrantes do projeto
+    - Meio (suas infos aqui)
+    - [Thiago Narcizo](https://www.linkedin.com/in/thiago-narcizo/)
+                ''')
