@@ -22,10 +22,9 @@ if selected2 == 'Início':
     #cópia de segurança
     df = ds.copy()
 
-    st.title('Análise de dados da saúde do sono')
+    st.title('Prevendo a duração e a saúde do seu sono')
 
     st.markdown('''
-    ## Prevendo a duração e a saúde do seu sono
     Preencha os dados e receba uma previsão da duração e da qualidade do seu sono com base nas informações fornecidas.
     ''')
 
