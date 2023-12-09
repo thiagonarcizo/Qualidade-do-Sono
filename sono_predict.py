@@ -1,51 +1,30 @@
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split, cross_val_predict
-from sklearn.metrics import mean_squared_error, r2_score
+import joblib
 import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+#carrega os modelos treinados
+model_sleep_duration = joblib.load('model_duration.pkl')
+model_sleep_quality = joblib.load('model_quality.pkl')
+
+#configuração base do streamlit
 st.set_page_config(
     page_icon='💤',
     page_title='Qualidade do Sono',
 )
 
+#navbar
 selected2 = option_menu(None, ['Início', 'Como funciona?', 'Sobre'], 
     icons=['house', 'clipboard2-data', 'info-circle'], 
     menu_icon='cast', default_index=0, orientation='horizontal')
 
+#página inicial
 if selected2 == 'Início':
-    #dataset:
-    uri = 'https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/data/ds.csv'
-    ds = pd.read_csv(uri)
-
-    #cópia de segurança
-    df = ds.copy()
-
     st.title('Prevendo a duração e a saúde do seu sono')
 
     st.markdown('''
     Preencha os dados e receba uma previsão da duração e da qualidade do seu sono com base nas informações fornecidas.
     ''')
-
-    #prepara os dados para o modelo
-    X = df[['Age', 'Occupation', 'Gender', 'Stress Level', 'Sleep Disorder']]
-    y_sleep_duration = df['Sleep Duration']
-    y_sleep_quality = df['Quality of Sleep']
-
-    #converte as variáveis categóricas em numéricas
-    X = pd.get_dummies(X)
-
-    #separa os dados em treino e teste
-    X_train, X_test, y_train_sleep_duration, y_test_sleep_duration, y_train_sleep_quality, y_test_sleep_quality = train_test_split(X, y_sleep_duration, y_sleep_quality, test_size=0.2, random_state=42)
-
-    #treina o modelo para duração do sono
-    model_sleep_duration = LinearRegression()
-    model_sleep_duration.fit(X_train, y_train_sleep_duration)
-
-    #treina o modelo para qualidade do sono
-    model_sleep_quality = LinearRegression()
-    model_sleep_quality.fit(X_train, y_train_sleep_quality)
 
     #faz as predições para duração do sono com base nos inputs pessoais
     idade = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
@@ -60,18 +39,18 @@ if selected2 == 'Início':
     #converte as variáveis categóricas em numéricas (do usuário)
     user_data = pd.get_dummies(user)
 
-    #reindexa o dataframe para que ele tenha as mesmas colunas do X_train
-    user_data = user_data.reindex(columns=X_train.columns, fill_value=0)
+    #reindexa o dataframe para que ele tenha as mesmas colunas do modelo
+    user_data = user_data.reindex(columns=['Age', 'Stress Level', 'Occupation_Accountant', 'Occupation_Doctor',
+       'Occupation_Engineer', 'Occupation_Lawyer', 'Occupation_Manager',
+       'Occupation_Nurse', 'Occupation_Sales Representative',
+       'Occupation_Salesperson', 'Occupation_Scientist',
+       'Occupation_Software Engineer', 'Occupation_Teacher', 'Gender_Female',
+       'Gender_Male', 'Sleep Disorder_Insomnia', 'Sleep Disorder_None',
+       'Sleep Disorder_Sleep Apnea'], fill_value=0)
 
     #faz as predições para duração e qualidade do sono
     sleep_duration_pred = model_sleep_duration.predict(user_data)
     sleep_quality_pred = model_sleep_quality.predict(user_data)
-
-    #calcula o R^2 and MSE para duração e qualidade do sono
-    sleep_duration_r2 = r2_score(y_test_sleep_duration, model_sleep_duration.predict(X_test))
-    sleep_duration_mse = mean_squared_error(y_test_sleep_duration, model_sleep_duration.predict(X_test))
-    sleep_quality_r2 = r2_score(y_test_sleep_quality, model_sleep_quality.predict(X_test))
-    sleep_quality_mse = mean_squared_error(y_test_sleep_quality, model_sleep_quality.predict(X_test))
 
     #botão para mostrar os resultados:
     if st.button('Mostrar resultados'):
@@ -81,6 +60,8 @@ if selected2 == 'Início':
     st.markdown('''
     *[Liga de Data Science da Unicamp (LigaDS)](https://www.instagram.com/ligadsunicamp/)*
     ''')
+
+#página 'Como funciona?'
 elif selected2 == 'Como funciona?':
     st.title('Como funciona?')
     st.markdown('''
@@ -122,6 +103,8 @@ elif selected2 == 'Como funciona?':
     st.markdown('''
     Além disso, em algumas categorias, o dataset pode carecer de uma quantidade expressiva de informações, o que influencia na análise estatística final dos dados.
                 ''')
+    
+#página 'Sobre'
 elif selected2 == 'Sobre':
     st.title('Sobre')
     st.markdown('''
