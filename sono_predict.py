@@ -80,7 +80,7 @@ if selected2 == 'Início':
         st.write('Qualidade do sono: ', round(sleep_quality_pred[0], 2), ' (0 - 10).')
 
     st.markdown('''
-    *Todos os créditos à [Liga de Data Science da Unicamp (LDS)](https://www.instagram.com/ligadsunicamp/)*
+    *[Liga de Data Science da Unicamp (LigaDS)](https://www.instagram.com/ligadsunicamp/)*
     ''')
 elif selected2 == 'Como funciona?':
     st.title('Como funciona?')
@@ -95,7 +95,7 @@ elif selected2 == 'Como funciona?':
     O modelo é confiável, pois apresenta um **R² de 0.85 para a duração do sono (MSE 0.10)** e **R² de 0.93 para a qualidade do sono (MSE 0.11)**.
                 ''')
     
-    
+
     st.markdown('''
     ## Visualizando os dados
     O gráfico abaixo mostra o **nível de estresse pelo tempo dormido (em horas) juntamente com a sua qualidade (escala de 0 a 10)**:
