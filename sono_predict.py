@@ -3,6 +3,49 @@ import pandas as pd
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+#traduzindo do português para o inglês cada entrada de string (o modelo foi treinado em inglês)
+def translate_prof(prof):
+    if prof == 'Engenheiro de Software' or prof == 'Engenheira de Software':
+        prof = 'Software Engineer'
+    elif prof == 'Médico' or prof == 'Médica':
+        prof = 'Doctor'
+    elif prof == 'Representante de Vendas' or prof == 'Representante de Vendas':
+        prof = 'Sales Representative'
+    elif prof == 'Professor' or prof == 'Professora':
+        prof = 'Teacher'
+    elif prof == 'Enfermeiro' or prof == 'Enfermeira':
+        prof = 'Nurse'
+    elif prof == 'Engenheiro' or prof == 'Engenheira':
+        prof = 'Engineer'
+    elif prof == 'Contador' or prof == 'Contadora':
+        prof = 'Accountant'
+    elif prof == 'Cientista' or prof == 'Cientista':
+        prof = 'Scientist'
+    elif prof == 'Advogado' or prof == 'Advogada':
+        prof = 'Lawyer'
+    elif prof == 'Vendedor' or prof == 'Vendedora':
+        prof = 'Salesperson'
+    else:
+        prof = 'Manager'
+    return prof
+
+def translate_sleep_disorder(sleep_disorder):
+    if sleep_disorder == 'Apneia do sono':
+        sleep_disorder = 'Sleep Apnea'
+    elif sleep_disorder == 'Insônia':
+        sleep_disorder = 'Insomnia'
+    else:
+        sleep_disorder = 'None'
+    return sleep_disorder
+
+def translate_gender(genero):
+    if genero == 'Masculino':
+        genero = 'Male'
+    else:
+        genero = 'Female'
+    return genero
+
+
 #carrega os modelos treinados
 model_sleep_duration = joblib.load('model_duration.pkl')
 model_sleep_quality = joblib.load('model_quality.pkl')
@@ -32,16 +75,19 @@ if selected2 == 'Início':
     #faz as predições para duração do sono com base nos inputs pessoais
     col1, col2 = st.columns(2)
 
+    masc_prof = ['Engenheiro de Software', 'Médico', 'Representante de Vendas', 'Professor', 'Enfermeiro', 'Engenheiro', 'Contador', 'Cientista', 'Advogado', 'Vendedor', 'Gerente']
+    fem_prof = ['Engenheira de Software', 'Médica', 'Representante de Vendas', 'Professora', 'Enfermeira', 'Engenheira', 'Contadora', 'Cientista', 'Advogada', 'Vendedora', 'Gerente']
+
     with col1:
         idade = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
-        genero = st.selectbox('Selecione seu gênero:', ('Male', 'Female'))
-        prof = st.selectbox('Insira a sua profissão', ('Software Engineer', 'Doctor', 'Sales Representative', 'Teacher', 'Nurse', 'Engineer', 'Accountant', 'Scientist', 'Lawyer', 'Salesperson', 'Manager'))
+        genero = st.selectbox('Selecione seu gênero:', ('Masculino', 'Feminino'))
+        prof = st.selectbox('Insira a sua profissão', masc_prof) if genero == 'Masculino' else st.selectbox('Insira a sua profissão', fem_prof)
     with col2:
         stress_level = st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1)
-        sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('None', 'Sleep Apnea', 'Insomnia'))
-
+        sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('Apneia do sono', 'Insônia', 'Nenhuma'), index=2)
+    
     #cria um dataframe com os dados do usuário
-    user = pd.DataFrame({'Age': [idade], 'Occupation': [prof], 'Gender': [genero], 'Stress Level': [stress_level], 'Sleep Disorder': [sleep_disorder]})
+    user = pd.DataFrame({'Age': [idade], 'Occupation': [translate_prof(prof)], 'Gender': [translate_gender(genero)], 'Stress Level': [stress_level], 'Sleep Disorder': [translate_sleep_disorder(sleep_disorder)]})
 
     #converte as variáveis categóricas em numéricas (do usuário)
     user_data = pd.get_dummies(user)
