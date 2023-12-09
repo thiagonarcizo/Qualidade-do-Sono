@@ -110,14 +110,22 @@ if selected2 == 'Início':
     sleep_duration_pred = model_sleep_duration.predict(user_data)
     sleep_quality_pred = model_sleep_quality.predict(user_data)
 
+    sleep_duration_vs_avg = sleep_duration_pred[0] - 7.132085561497325
+    sleep_quality_vs_avg = sleep_quality_pred[0] - 7.31283422459893
+
     #botão para mostrar os resultados:
     if st.button(r'''$\textsf{\LARGE Mostrar Resultados}$'''):
-        if genero == 'Masculino':
-            st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
-            st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
-        else:
-            st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
-            st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
+        col1, col2 = st.columns(2)
+        with col1:
+            if genero == 'Masculino':
+                st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
+                st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
+            else:
+                st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
+                st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
+        with col2:
+            st.latex(r'\textsf{\Large Você tem '+'\Large '+str(round(abs(sleep_duration_vs_avg), 2))+' horas de sono a mais do que a média}' if sleep_duration_vs_avg > 0 else (r'\textsf{\Large Você tem '+'\Large '+str(round(abs(sleep_duration_vs_avg), 2))+' horas de sono a menos do que a média}'))
+            st.latex(r'\textsf{\Large Você pontuou '+'\Large '+str(round(abs(sleep_quality_vs_avg), 2))+' a mais do que a média}' if sleep_quality_vs_avg > 0 else (r'\textsf{\Large Você pontuou '+'\Large '+str(round(abs(sleep_quality_vs_avg), 2))+' a menos do que a média}'))
 
 #página 'Como funciona?'
 elif selected2 == 'Como funciona?':
@@ -128,6 +136,9 @@ elif selected2 == 'Como funciona?':
                 ''')
     st.markdown('''
     A partir dessas variáveis, treinamos um modelo de regressão linear para prever a duração e a qualidade do sono de uma pessoa com base nas informações fornecidas.
+                ''')
+    st.markdown('''
+    A média geral de tempo de sono é: 7.13 horas e a média geral de qualidade do sono é: 7.31.
                 ''')
     st.divider()
     st.markdown('''
