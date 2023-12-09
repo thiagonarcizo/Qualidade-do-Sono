@@ -159,6 +159,10 @@ elif selected2 == 'Como funciona?':
         **Tempo médio de sono levando em conta a desordem do sono**:
                     ''')
         st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_desordem.png')
+        st.markdown('''
+        **Tempo médio de sono por gênero:**
+                    ''')
+        st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_genero.png')
 
     st.markdown('''
     ## Limitações
