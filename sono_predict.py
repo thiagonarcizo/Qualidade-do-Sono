@@ -45,7 +45,6 @@ def translate_gender(genero):
         genero = 'Female'
     return genero
 
-
 #carrega os modelos treinados
 model_sleep_duration = joblib.load('model_duration.pkl')
 model_sleep_quality = joblib.load('model_quality.pkl')
@@ -57,10 +56,16 @@ st.set_page_config(
     layout='wide'
 )
 
+left_co, last_co = st.columns(2)
+#logo
+with last_co:
+    st.image('imgs/dslogo.png', width=100)
+
 #navbar
-selected2 = option_menu(None, ['Início', 'Como funciona?', 'Sobre'], 
-    icons=['house', 'clipboard2-data', 'info-circle'],
-    menu_icon='cast', default_index=0, orientation='horizontal')
+with left_co:
+    selected2 = option_menu(None, ['Início', 'Como funciona?', 'Sobre'], 
+        icons=['house', 'clipboard2-data', 'info-circle'],
+        menu_icon='cast', default_index=0, orientation='horizontal')
 
 #página inicial
 if selected2 == 'Início':
@@ -79,12 +84,12 @@ if selected2 == 'Início':
     fem_prof = ['Engenheira de Software', 'Médica', 'Representante de Vendas', 'Professora', 'Enfermeira', 'Engenheira', 'Contadora', 'Cientista', 'Advogada', 'Vendedora', 'Gerente']
 
     with col1:
-        idade = st.number_input('Insira a sua idade:', min_value=0, max_value=100, value=0, step=1)
-        genero = st.selectbox('Selecione seu gênero:', ('Masculino', 'Feminino'))
-        prof = st.selectbox('Insira a sua profissão', masc_prof) if genero == 'Masculino' else st.selectbox('Insira a sua profissão', fem_prof)
+        idade = st.number_input(r'''$\textsf{\Large Insira a sua idade:}$''', min_value=0, max_value=100, value=0, step=1)
+        genero = st.selectbox(r'''$\textsf{\Large Selecione seu gênero:}$''', ('Masculino', 'Feminino'))
+        prof = st.selectbox(r'''$\textsf{\Large Insira a sua profissão:}$''', masc_prof) if genero == 'Masculino' else st.selectbox('Insira a sua profissão', fem_prof)
     with col2:
-        stress_level = st.number_input('Seu nível de estresse (0 - 10):', min_value=0, max_value=10, value=0, step=1)
-        sleep_disorder = st.selectbox('Em qual dessas condições de sono você melhor se enquadra?', ('Apneia do sono', 'Insônia', 'Nenhuma'), index=2)
+        stress_level = st.number_input(r'''$\textsf{\Large Seu nível de estresse (0-10):}$''', min_value=0, max_value=10, value=0, step=1)
+        sleep_disorder = st.selectbox(r'''$\textsf{\Large Distúrbio do sono:}$''', ('Apneia do sono', 'Insônia', 'Nenhum'), index=2)
     
     #cria um dataframe com os dados do usuário
     user = pd.DataFrame({'Age': [idade], 'Occupation': [translate_prof(prof)], 'Gender': [translate_gender(genero)], 'Stress Level': [stress_level], 'Sleep Disorder': [translate_sleep_disorder(sleep_disorder)]})
@@ -106,13 +111,13 @@ if selected2 == 'Início':
     sleep_quality_pred = model_sleep_quality.predict(user_data)
 
     #botão para mostrar os resultados:
-    if st.button('Mostrar resultados'):
-        st.write('Duração do sono: ', round(sleep_duration_pred[0], 2), ' horas.')
-        st.write('Qualidade do sono: ', round(sleep_quality_pred[0], 2), ' (0 - 10).')
-
-    st.markdown('''
-    *[Liga de Data Science da Unicamp (LigaDS)](https://www.instagram.com/ligadsunicamp/)*
-    ''')
+    if st.button(r'''$\textsf{\LARGE Mostrar Resultados}$'''):
+        if genero == 'Masculino':
+            st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
+            st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
+        else:
+            st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
+            st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
 
 #página 'Como funciona?'
 elif selected2 == 'Como funciona?':
