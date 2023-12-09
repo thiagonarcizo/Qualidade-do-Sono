@@ -96,9 +96,13 @@ elif selected2 == 'Como funciona?':
                 ''')
     st.markdown('''
     ## Dados visuais
-    O gráfico abaixo mostra o nível de estresse pelo tempo dormido (em horas) juntamente com a sua qualidade (escala de 0 a 10):
+    O gráfico abaixo mostra o **nível de estresse pelo tempo dormido (em horas) juntamente com a sua qualidade (escala de 0 a 10)**:
                 ''')
-    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/img/fig1.png')
+    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/estresse_tempo_qualidade.png')
+    st.markdown('''
+    O gráfico abaixo mostra o **tempo médio de sono por profissão** e **a qualidade média do sono por profissão**:
+                ''')
+    st.image('https://raw.githubusercontent.com/thiagonarcizo/Qualidade-do-Sono/main/imgs/tempo_profissao.png')
     st.markdown('''
     ## Limitações
     O modelo, obviamente, não é perfeito, pois não leva em consideração outros fatores que podem influenciar a duração e a qualidade do sono, como a alimentação e a prática de exercícios físicos.
