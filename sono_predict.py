@@ -146,7 +146,7 @@ elif selected2 == 'Como funciona?':
     Para avaliar a qualidade do modelo treinado, calculamos o **R²** e o **MSE** (Erro Quadrático Médio) para a duração e a qualidade do sono.
                 ''')
     st.markdown('''
-    Sim, modelo é confiável, pois apresenta um **R² de 0.85 para a duração do sono (MSE 0.10)** e **R² de 0.93 para a qualidade do sono (MSE 0.11)**.
+    Sim, o modelo é confiável, pois apresenta um **R² de 0.85 para a duração do sono (MSE 0.10)** e **R² de 0.93 para a qualidade do sono (MSE 0.11)**.
                 ''')
     with st.expander('Clique aqui para visualizar os gráficos', expanded=False):
         st.markdown('''
