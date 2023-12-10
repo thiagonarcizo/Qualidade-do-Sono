@@ -114,7 +114,7 @@ if selected2 == 'Início':
     sleep_quality_vs_avg = sleep_quality_pred[0] - 7.31283422459893
 
     #botão para mostrar os resultados:
-    if st.button(r'''$\textsf{\LARGE Mostrar Resultados}$'''):
+    if st.button(r'''$\textsf{\LARGE Prever}$'''):
         if genero == 'Masculino':
             st.latex(r'\textsf{\Large Tempo de sono: '+'\Huge '+str(round(sleep_duration_pred[0], 2))+'\Large h}')
             st.latex(r'\textsf{\Large Qualidade do sono: '+'\Huge '+str(round(sleep_quality_pred[0], 2))+'\Large (0-10)}')
