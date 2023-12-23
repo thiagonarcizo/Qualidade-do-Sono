@@ -86,7 +86,7 @@ if selected2 == 'Início':
     with col1:
         idade = st.number_input(r'''$\textsf{\Large Sua idade:}$''', min_value=0, max_value=100, value=0, step=1)
         genero = st.selectbox(r'''$\textsf{\Large Seu gênero:}$''', ('Masculino', 'Feminino'))
-        prof = st.selectbox(r'''$\textsf{\Large Sua profissão:}$''', masc_prof) if genero == 'Masculino' else st.selectbox('Insira a sua profissão', fem_prof)
+        prof = st.selectbox(r'''$\textsf{\Large Sua profissão:}$''', masc_prof) if genero == 'Masculino' else st.selectbox(r'''$\textsf{\Large Sua profissão:}$''', fem_prof)
     with col2:
         stress_level = st.number_input(r'''$\textsf{\Large Seu nível de estresse (0-10):}$''', min_value=0, max_value=10, value=0, step=1)
         sleep_disorder = st.selectbox(r'''$\textsf{\Large Distúrbio do sono:}$''', ('Apneia do sono', 'Insônia', 'Nenhum'), index=2)
