@@ -188,8 +188,7 @@ elif selected2 == 'Sobre':
     - LinkedIn: [Liga de Data Science](https://www.linkedin.com/company/liga-de-data-science/)
                 ''')
     st.divider()
-    st.title('Integrantes do projeto')
+    st.title('Feito por:')
     st.markdown('''
-    - Meio (suas infos aqui)
     - [Thiago Narcizo](https://www.linkedin.com/in/thiago-narcizo/)
                 ''')
